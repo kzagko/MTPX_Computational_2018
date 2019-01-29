@@ -1,0 +1,25 @@
+sigma = 5;
+mikos = 500;
+platos = 300;
+
+%[surf,sigmasurf] = surfsigma(mikos,sigma,platos,sigma);
+
+[x,y] = meshgrid(linspace(1,mikos,30),linspace(1,platos,30));
+[z, sigmaS] = surfsigma(x,sigma,y,sigma);
+
+surf(x,y,100.*sigmaS./z);
+ylim([1,platos]);
+xlim([20,mikos]);
+zlim([0,100]);
+title('Percentage of relative uncertainty in surface area');
+xlabel('Mikos (m)');
+ylabel('Platos (m)');
+
+
+
+
+function [surf,sigma] = surfsigma(m,sm,p,sp)
+
+    surf = m.*p;
+    sigma = sqrt(p.^2.*sm.^2+m.^2.*sp.^2);
+end

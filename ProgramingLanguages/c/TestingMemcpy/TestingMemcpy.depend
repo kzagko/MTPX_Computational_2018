@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1545421968 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/TestingMemcpy/nrutil.c
+	<stdio.h>
+	<stddef.h>
+	<stdlib.h>
+
+1545516540 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/TestingMemcpy/main.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"nrutil.h"
+	<math.h>
+	"JoinSortArrays.h"
+
+1545422307 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/TestingMemcpy/nrutil.h
+
+1545516719 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/TestingMemcpy/JoinSortArrays.c
+	<string.h>
+	<stdio.h>
+
+1545510754 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/TestingMemcpy/JoinSortArrays.h
+

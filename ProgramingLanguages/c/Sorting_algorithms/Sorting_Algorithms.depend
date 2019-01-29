@@ -1,0 +1,98 @@
+# depslib dependency file v1.0
+1543170314 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/Bublesortexample.c
+	<stdio.h>
+	"functions.c"
+
+1545420760 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/functions.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+
+1545420760 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/functions.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+
+1545425756 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/InsertionSort.c
+	<stdio.h>
+	"nrutil.h"
+
+1545445873 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/main.c
+	<stdio.h>
+	<stdlib.h>
+	"nrutil.h"
+	<time.h>
+	<math.h>
+	"SelectionSort.h"
+	"BubbleSort.h"
+	"InsertionSort.h"
+
+1545422372 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/SelectionSort.c
+	<stdio.h>
+	"nrutil.h"
+
+1545422372 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/SelectionSort.c
+	<stdio.h>
+	"nrutil.h"
+
+1545421968 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/nrutil.c
+	<stdio.h>
+	<stddef.h>
+	<stdlib.h>
+
+1545421968 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/nrutil.c
+	<stdio.h>
+	<stddef.h>
+	<stdlib.h>
+
+1545422307 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/nrutil.h
+
+1545422612 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/SelectionSort.h
+
+1545424393 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/BubbleSort.h
+
+1545423346 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/BubbleSort.c
+	"nrutil.h"
+
+1545425664 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/Sorting_Algorithms/InsertionSort.h
+
+1545423346 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/BubbleSort.c
+	"nrutil.h"
+
+1545422307 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/nrutil.h
+
+1545425756 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/InsertionSort.c
+	<stdio.h>
+	"nrutil.h"
+
+1545509219 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"nrutil.h"
+	<time.h>
+	<math.h>
+	"SelectionSort.h"
+	"BubbleSort.h"
+	"InsertionSort.h"
+
+1545422612 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/SelectionSort.h
+
+1545424393 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/BubbleSort.h
+
+1545425664 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/InsertionSort.h
+
+1545421968 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/nrutil.c
+	<stdio.h>
+	<stddef.h>
+	<stdlib.h>
+
+1545422372 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/SelectionSort.c
+	<stdio.h>
+	"nrutil.h"
+
+1545510577 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/JoinSortArrays.c
+	<string.h>
+

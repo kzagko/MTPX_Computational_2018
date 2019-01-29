@@ -1,0 +1,153 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration file="/home/orion/Documents/MTPX_Computational/ProgramingTools/MATLAB_course/Pi_sphere.prj" location="/home/orion/Documents/MTPX_Computational/ProgramingTools/MATLAB_course" name="Pi_sphere" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>Pi_sphere</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>/Pi_sphere/</param.installpath.string>
+    <param.installpath.combo>option.installpath.user</param.installpath.combo>
+    <param.logo />
+    <param.install.notes>In the following directions, replace MCR_ROOT by the directory where the MATLAB Runtime is installed on the target machine.
+
+(1) Set the environment variable XAPPLRESDIR to this value:
+
+    MCR_ROOT/v92/X11/app-defaults
+
+
+(2) If the environment variable LD_LIBRARY_PATH is undefined, set it to the concatenation of the following strings:
+
+    MCR_ROOT/v92/runtime/glnxa64:
+    MCR_ROOT/v92/bin/glnxa64:
+    MCR_ROOT/v92/sys/os/glnxa64:
+    MCR_ROOT/v92/sys/opengl/lib/glnxa64
+
+    If it is defined, set it to the concatenation of these strings:
+
+    ${LD_LIBRARY_PATH}: 
+    MCR_ROOT/v92/runtime/glnxa64:
+    MCR_ROOT/v92/bin/glnxa64:
+    MCR_ROOT/v92/sys/os/glnxa64:
+    MCR_ROOT/v92/sys/opengl/lib/glnxa64</param.install.notes>
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}/Pi_sphere/for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}/Pi_sphere/for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}/Pi_sphere/for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}/Pi_sphere</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>false</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.summary />
+      <param.description />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/Pi_sphere.m</file>
+    </fileset.main>
+    <fileset.resources />
+    <fileset.package />
+    <fileset.depfun />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}/Pi_sphere/for_testing" name="readme.txt" optional="true">/home/orion/Documents/MTPX_Computational/ProgramingTools/MATLAB_course/Pi_sphere/for_testing/readme.txt</file>
+      <file location="${PROJECT_ROOT}/Pi_sphere/for_testing" name="splash.png" optional="false">/home/orion/Documents/MTPX_Computational/ProgramingTools/MATLAB_course/Pi_sphere/for_testing/splash.png</file>
+      <file location="${PROJECT_ROOT}/Pi_sphere/for_testing" name="run_Pi_sphere.sh" optional="false">/home/orion/Documents/MTPX_Computational/ProgramingTools/MATLAB_course/Pi_sphere/for_testing/run_Pi_sphere.sh</file>
+      <file location="${PROJECT_ROOT}/Pi_sphere/for_testing" name="Pi_sphere" optional="false">/home/orion/Documents/MTPX_Computational/ProgramingTools/MATLAB_course/Pi_sphere/for_testing/Pi_sphere</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/usr/local/MATLAB/R2017a</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="polyspacebugfinder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>false</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>true</linux>
+      <solaris>false</solaris>
+      <osver>4.15.0-42-generic</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>glnxa64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

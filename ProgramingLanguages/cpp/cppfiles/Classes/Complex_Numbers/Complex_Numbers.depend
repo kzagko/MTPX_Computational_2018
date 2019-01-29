@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1547407484 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/cpp/cppfiles/Classes/Complex_Numbers/Complex.cpp
+	<iostream>
+	"Complex.h"
+
+1547407487 /home/orion/Documents/MTPX_Computational/ProgramingLanguages/cpp/cppfiles/Classes/Complex_Numbers/Complex.h
+
