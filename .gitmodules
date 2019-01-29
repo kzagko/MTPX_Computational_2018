@@ -1,0 +1,3 @@
+[submodule "ProgramingLanguages/openmp/openmp-course"]
+	path = ProgramingLanguages/openmp/openmp-course
+	url = https://github.com/niksterg/openmp-course.git
