@@ -1,6 +1,7 @@
 clc;
 clear all;
 
+%%Preload
 %find all data and activities 
 filelist = dir('EmissionP10*EU15.xls');%Get the filenames of the data files
 names = {filelist(:).name};
@@ -17,6 +18,7 @@ end
 Countries = Countries';
 CountLength = length(Countries);
 
+%%MAIN program
 %Prompt user to choose from countries and activities
 prompt = ['Choose type of plot\n One(1) for plotting DIFFERENT quantities'...
     'for the same country\n Two(2) for plotting the SAME quantity for'...
@@ -110,15 +112,6 @@ end
 
 
 
-function Dar = DataLoader(filenames,ActCount,Count)
-    %Function that searches throught the filenames and returns the data for
-    %a specific country and activity
-    datafile = filenames(ActCount).name;
-    
-    [data,txt,raw] = xlsread(datafile);
-    Dar = data(:,Count);
-    
-end
 
 
 
@@ -127,40 +120,3 @@ end
 
 
 
-function Chartme(StrA,StrB,StrC,D1,D2,years,OpChk,nbins1)
-    
-    %Default bin number follows Sturge's Law
-    
-    if nargin<8
-        nbins1 = round(1+3.322*log10(length(D1)));
-    end
-    %Plot initial data
-    subplot(1,2,1);
-    histogram(D1,nbins1,'DisplayStyle','stairs')
-    hold on;
-    histogram(D2,nbins1,'DisplayStyle','stairs')
-    if OpChk == 2 %Two countries same activity
-        leg1 = strcat(StrA,"-",StrC);
-        leg2 = strcat(StrB,"-",StrC);
-        legend(leg1,leg2,'Location','Best')
-    else%Same country different activities
-        leg1 = strcat(StrA,"-",StrB);
-        leg2 = strcat(StrA,"-",StrC);
-        legend(leg1,leg2,'Location','Best')
-    end
-    title('EmissionP10 - Initial Data');
-    
-    %find and remove mean value and normalize sigma 
-    D1 = D1-mean(D1);
-    D2 = D2-mean(D2);
-    D1 = D1./std(D1);
-    D2 = D2./std(D2);
-    subplot(1,2,2);
-    histogram(D1,nbins1,'DisplayStyle','stairs')
-    hold on;
-    histogram(D2,nbins1,'DisplayStyle','stairs')
-    legend(leg1,leg2,'Location','Best')
-    title('EmissionP10 - Mean=0 and Sigma=1');
-
-
-end
