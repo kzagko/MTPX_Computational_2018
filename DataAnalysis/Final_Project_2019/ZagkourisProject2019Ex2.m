@@ -20,38 +20,102 @@ Countries = Countries';
 CountLength = length(Countries);
 
 alpha = 0.05;% Set the significance level Default 5%
-
+numbin = 4;
 SumH0 = 0;
+degfree = numbin-3;%because continuous distributions with mean and sigma and sum npoints
+chi2limit = chi2inv(1-alpha,degfree);%the upperlimit in chi2 above which H0 is rejected
 for i=1:ActLength
     
-    
+    expval=0;
     for j=1:CountLength
         dataV = DataLoader(filelist,i,j);
-        dataV = dataV-mean(dataV);
-        dataV = dataV./std(dataV);
+        npoints = length(dataV);
+        %dataV = dataV-mean(dataV);
+        %dataV = dataV./std(dataV);
         %Calculate basic statistics
         meanV = mean(dataV);
         stdV =  std(dataV);
-        hist1 = histogram(dataV,5);
-  
-%         chi2 = sum((dataV-meanV)^2./dataV);
-        if i ~=10 & j ~= 7%remove problematic dataset
-            [h,p,stats] = chi2gof(dataV,'Alpha',alpha,'NBins',5);
-        else
-            h = 0;
+        [ncounts, Edges] = histcounts(dataV,numbin);
+       
+        for k=1:numbin
+            expval(k) = npoints*(normcdf(Edges(k+1),meanV,stdV)-normcdf(Edges(k),meanV,stdV));
+            %expval(k) = npoints*(normcdf(Edges(k+1))-normcdf(Edges(k)));
         end
+        xi2 = sum((ncounts-expval).^2./expval);
+        %pval = chi2cdf(xi2,degfree,'upper');
+        if xi2 < chi2limit
+            h = 0;
+        else
+            h = 1;
+        end
+        p1 = scatter(i*j,xi2);
+        hold on;
+%         chi2 = sum((dataV-meanV)^2./dataV);
+        %if i ~=10 & j ~= 7%remove problematic dataset
+            %pd = fitdist(dataV,'Normal');
+            %[h,p,stats] = chi2gof(dataV,'Alpha',alpha,'NBins',7,'CDF',pd);
+        %else
+        %    h = 0;
+        %end
+        
         SumH0 = SumH0 + h;
-        fprintf('%d %d %d\n',i,j,SumH0);
+        %fprintf('%d %d %d\n',i,j,SumH0);
     end
     
     
 end
 
+p2 = line([1 ActLength*CountLength],[chi2limit chi2limit],'Color','red','LineStyle','--');
+title('Testing if datasets are from Normal distribution');
+ylabel('Chi2 value');
+xlabel('Dataset');
+legend([p1,p2],{'Chi2', 'Chi2 maximum'});
+hold off;
+fprintf('\nAt the significance level of %5.2f%% the percentage of the datasets that could be from a Normal distribution are %5.2f%% \n',100*alpha,100*(1-SumH0/(ActLength*CountLength)));
+
+
+%%Part two
+
+DataM = zeros(length(years),ActLength);
+
+for i=1:ActLength
+    
+    for j=1:CountLength
+       dataV = DataLoader(filelist,i,j);
+       DataM(:,i) = DataM(:,i) + dataV;
+    end
+    npoints = length(years);
+        %dataV = dataV-mean(dataV);
+        %dataV = dataV./std(dataV);
+        %Calculate basic statistics
+    meanV = mean(DataM(:,i));
+    stdV =  std(DataM(:,i));
+    [ncounts, Edges] = histcounts(DataM(:,i),numbin);
+       
+        for k=1:numbin
+            expval(k) = npoints*(normcdf(Edges(k+1),meanV,stdV)-normcdf(Edges(k),meanV,stdV));
+            %expval(k) = npoints*(normcdf(Edges(k+1))-normcdf(Edges(k)));
+        end
+        xi2 = sum((ncounts-expval).^2./expval);
+        %pval = chi2cdf(xi2,degfree,'upper');
+        fprintf('\nDoes the Activity %s Follow a normal distribution at %5.2f%% significance level: ',Activities{i},alpha);
+        if xi2 < chi2limit
+            h = 0;
+            fprintf('YES');
+            lwid = 1.5;
+        else
+            h = 1;
+            fprintf('NO');
+            lwid = 0.5;
+        end
+    NormAct = DataM(:,i)-meanV;
+    NormAct = NormAct./std(NormAct);
+    histogram(NormAct,numbin,'DisplayStyle','stairs','LineWidth',lwid);
+    hold on;
+    
+end
+
+legend(Activities{:},'Location','Best');
 
 
 
-
-
-
-
-%num2str(100*(1-p)),'% significance level']})
