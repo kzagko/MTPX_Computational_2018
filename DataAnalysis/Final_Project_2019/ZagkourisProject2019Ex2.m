@@ -75,7 +75,7 @@ fprintf('\nAt the significance level of %5.2f%% the percentage of the datasets t
 
 
 %%Part two
-
+figure();
 DataM = zeros(length(years),ActLength);
 
 for i=1:ActLength
