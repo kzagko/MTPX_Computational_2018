@@ -71,9 +71,7 @@ ylabel('Chi2 value');
 xlabel('Dataset');
 legend([p1,p2],{'Chi2', 'Chi2 maximum'});
 hold off;
-fprintf(['\nAt the significance level of %5.2f%% the percentage of the datasets' ...
-        'that could be from a Normal distribution are %5.2f%% \n'],100*alpha, ...
-        100*(1-SumH0/(ActLength*CountLength)));
+fprintf('\nAt the significance level of %5.2f%% the percentage of the datasets that could be from a Normal distribution are %5.2f%% \n',100*alpha,100*(1-SumH0/(ActLength*CountLength)));
 
 
 %%Part two
@@ -95,14 +93,12 @@ for i=1:ActLength
     [ncounts, Edges] = histcounts(DataM(:,i),numbin);
        
         for k=1:numbin
-            expval(k) = npoints*(normcdf(Edges(k+1),meanV,stdV)-normcdf(Edges(k), ...
-                meanV,stdV));
+            expval(k) = npoints*(normcdf(Edges(k+1),meanV,stdV)-normcdf(Edges(k),meanV,stdV));
             %expval(k) = npoints*(normcdf(Edges(k+1))-normcdf(Edges(k)));
         end
         xi2 = sum((ncounts-expval).^2./expval);
         %pval = chi2cdf(xi2,degfree,'upper');
-        fprintf('\nDoes %s Follow a normal distribution at %5.2f%% significance level: ', ...
-            Activities{i},100*alpha);
+        fprintf('\nDoes the Activity %s Follow a normal distribution at %5.2f%% significance level: ',Activities{i},alpha);
         if xi2 < chi2limit
             h = 0;
             fprintf('YES');
@@ -123,7 +119,7 @@ plot(x1,18*normpdf(x1),'LineWidth',2);
 legend({Activities{:},'Normal Distribution'},'Location','Best');
 title('Normalized Activity Distribution');
 ylabel('Occurances');
-xlabel('Sigma distance from mean');
+xlabel('');
 
 
 

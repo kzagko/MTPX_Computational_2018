@@ -4,9 +4,7 @@ function Dar = DataLoader(filenames,ActCount,Count,chk)
     datafile = filenames(ActCount).name;
     
     [data,txt,raw] = xlsread(datafile);
-    if nargin<4 | chk ==0
-        Dar = data(:,Count);
-    else
-        Dar = data;
-    end
+    if nargin<4 or chk
+    Dar = data(:,Count);
+    
 end
