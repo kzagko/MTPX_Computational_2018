@@ -1,6 +1,6 @@
-function [Rmax combmax] = AllCountries(AM,alpha)
+function [Rmax combmax count1 count2] = AllActivities(AM,alpha)
     nCount = length(AM(1,:));
-    comb = combnk(1:nCount,2);%get all possible combinations of countries
+    comb = combnk(1:nCount,2);%get all possible combinations of Activities
     ncomb = length(comb(:,1));
     RPP = zeros(ncomb,3);
     
@@ -11,16 +11,15 @@ function [Rmax combmax] = AllCountries(AM,alpha)
     
     figure();
     h = histogram(RPP(:,1));
-    title('Correlations among all sets of countries');
+    title('Correlations among all sets of Activities');
     ylabel('Counts');
     xlabel('Corellation factor');
     
     %sort the R values and pick the 10 highest
-    [Rsorted I] = sort(RPP(:,1));
+    [Rsorted I] = sort(RPP(:,1),'descend');
     Rmax = Rsorted(1:10);
     Imax = I(1:10);
     combmax = comb(Imax,:);
-    figure();
     count1 = sum(RPP(:,2)>=alpha)/ncomb;
-    count1 = sum(RPP(:,)>=alpha)/ncomb;
+    count2 = sum(RPP(:,3)>=alpha)/ncomb;
 end
