@@ -1,0 +1,13 @@
+function [] = AdjRCountries(AM,BM,n)
+    nCount = length(AM(1,:));
+    
+    R2 = zeros(nCount,1);
+    O1 = zeros(nCount,1);
+    for i =1:nCount
+        
+        
+        
+    end
+
+
+end
