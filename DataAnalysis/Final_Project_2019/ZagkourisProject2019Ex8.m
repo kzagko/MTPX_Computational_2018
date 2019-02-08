@@ -14,6 +14,7 @@ ActLength = length(Activities);
 [data,txt,raw] = xlsread('EmissionP10EnergyIndustriesEU15.xls');
 dataname = txt(2,1);
 years = str2double(txt(2:end,2));
+Nyears = length(years);
 Countries = [];
 for i=1:length(data(1,:)) %get the name of the countries and store them
     Countries = [Countries, extractBetween(txt(1,i+2),") - "," - ")];
@@ -21,29 +22,16 @@ end
 Countries = Countries';
 CountLength = length(Countries);
 alpha = 0.05;%Set the significance level
-norder = 1; %maximum polynomial order to fit for
+norder = 5; %maximum polynomial order to fit for
 
 %%Main program
-AM = xlsread(TotFilename);
-R2M = zeros(CountLength,ActLength);
-O1M = zeros(CountLength,ActLength);
+AM = xlsread(TotFilename);%load the totals
+BM = zeros(Nyears,ActLength);
 
-for i=1:ActLength
-    BM = DataLoader(filelist,i,1,2);
-    [R2M(:,i) O1M(:,i)] = AdjRCountries(AM,BM,norder);
+
+for i = 1:ActLength
+    BM(:,i) = DataLoader(filelist,i,2);
 end
 
-[R2Ms Ind] = sort(R2M,'descend');
-R2Max = R2Ms(1,:);
-idx = sub2ind(size(O1M), Ind(1,:), [1:ActLength]);
-OrdMax = O1M(idx);
-CountriesMax = {Countries{Ind(1,:)}};
-%ActivitiesMax = [Activities{:}];
-T = table(R2Max',OrdMax',CountriesMax','RowNames' ,Activities,'VariableNames',{'AdjR2','Order', 'Country'})
-
-figure();
-histogram(O1M);
-
-
-
+CM = [AM(:,2) BM];
 
