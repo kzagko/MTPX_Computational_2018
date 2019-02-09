@@ -25,14 +25,11 @@ alpha = 0.05;%Set the significance level
 norder = 5; %maximum polynomial order to fit for
 
 %%Main program
-AM = xlsread(TotFilename);%load the totals
-BM = zeros(Nyears,ActLength);
+%AM = xlsread(TotFilename);%load the totals
+%Set the mark to 7 in order to check for Greece
+mark = 7;
+for j=1:ActLength
+    BM = DataLoader(filelist,j,1,2);
 
-
-for j=1:CountLength
-    for i = 1:ActLength
-        BM(:,i) = DataLoader(filelist,i,j);
-    end
-    CM = [AM(:,j) BM]
-    StepfitCountries(CM,Countries{j},Activities);
+    StepfitActivities(BM,Activities{j},Countries,mark);
 end

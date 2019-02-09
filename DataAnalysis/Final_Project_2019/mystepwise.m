@@ -30,8 +30,9 @@ X = [ones(size(y)) CM(:,Ind(1)+1)];%load the best fitting variable
 InitVar = 1:VarSize;%array with all the variable indices
 SelVar = Ind(1);%Array with the selected variable indices
 InitVar(Ind(1)) = []; %remove the variable that was accepted in the fit
+remcount = length(InitVar);%remaining variables to test
 while 1
-    remcount = length(InitVar);%remaining variables to test
+    
     AdjR2a = zeros(remcount,1);
     b1 = zeros(1+k+1,remcount);
     for j=1:remcount
@@ -44,6 +45,7 @@ while 1
         
     if AdjR2aS(1) < AdjR20
         break;
+    
     else
         AdjR20 = AdjR2aS(1);
         b = b1(:,IndS(1));
@@ -51,8 +53,11 @@ while 1
         InitVar(IndS(1)) = [];
         k = length(SelVar);
         X = [X CM(:,SelVar(end))];
+        remcount = length(InitVar);%remaining variables to test
     end
-    
+    if remcount ==0
+        break;
+    end
 end
 
 bfinal = zeros(VarSize+1,1);
