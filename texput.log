@@ -1,0 +1,48 @@
+This is TeXk, Version 3.14159265 (TeX Live 2017/Debian) (preloaded format=tex 2019.2.10)  10 FEB 2019 03:54
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**&tex
+
+*h
+
+*-h
+
+*?
+
+*help
+
+*
+! Interruption.
+<*> 
+    
+? h
+You rang?
+Try to insert some instructions for me (e.g.,`I\showlists'),
+unless you just want to quit by typing `X'.
+
+? I\showlists
+
+### horizontal mode entered at line 0
+\hbox(0.0+0.0)x20.0
+\tenrm h
+\glue 3.33333 plus 1.66666 minus 1.11111
+\tenrm -
+\discretionary
+etc.
+spacefactor 1000
+### vertical mode entered at line 0
+prevdepth ignored
+
+! OK.
+<insert>   \showlists
+                     
+<*> 
+    
+? q
+OK, entering \batchmode...
+! Emergency stop.
+<*> 
+    
+*** (job aborted, no legal \end found)
+
+No pages of output.

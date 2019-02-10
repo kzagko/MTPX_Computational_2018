@@ -22,13 +22,27 @@ end
 Countries = Countries';
 CountLength = length(Countries);
 alpha = 0.05;%Set the significance level
-norder = 5; %maximum polynomial order to fit for
+
 
 %%Main program
-%AM = xlsread(TotFilename);%load the totals
+%% pick nSet random countries and activities
+nSet = 10;
+rng(0,'twister');%initialise seed for repetability
+CountRnd = randi(CountLength,nSet,1);
+ActRnd = randi(ActLength,nSet,1);
+Trend = zeros(nSet,1);
+Corr =  zeros(nSet,1);
+for i=1:nSet
+    Country = Countries{CountRnd(i)};
+    Activity = Activities{ActRnd(i)};
+    BM = DataLoader(filelist,ActRnd(i),CountRnd(i));
 
-for j=1:ActLength
-    BM = DataLoader(filelist,j,1,2);
-
-    StepfitActivities(CM,Activities{j},Countr);
+    [Trend(i) Corr(i)] = mytisan(BM,years,Country,Activity);
 end
+
+T=table({Countries{CountRnd}}',{Activities{ActRnd}}',Trend,Corr,...
+    'VariableNames',{'Countries','Activities','Trend', 'AutoCorr'})
+
+
+
+
