@@ -21,8 +21,8 @@ CountLength = length(Countries);
 %%MAIN program
 %Prompt user to choose from countries and activities
 prompt = ['Choose type of plot\n One(1) for plotting DIFFERENT quantities'...
-    'for the same country\n Two(2) for plotting the SAME quantity for'...
-    'different countries\n Please insert 1 or 2\n'];
+    ' for the same country\n Two(2) for plotting the SAME quantity for'...
+    ' different countries\n Please insert 1 or 2\n'];
 
 while 1
     chk1 = int8(input(prompt));
@@ -71,7 +71,8 @@ if chk1 ==1
     D1 = DataLoader(filelist,Count2,Count1);
     D2 = DataLoader(filelist,Count3,Count1);
     
-    Chartme(Countries(Count1),Activities(Count2),Activities(Count3),D1,D2,years,chk1)
+    Chartme(Countries(Count1),Activities(Count2),Activities(Count3),D1,D2,...
+        years,chk1)
     
 else
     prompt2 = ['Choose the first country by the number on the left: '];
@@ -106,7 +107,8 @@ else
     D1 = DataLoader(filelist,Count3,Count1);
     D2 = DataLoader(filelist,Count3,Count2);
     
-    Chartme(Countries(Count1),Countries(Count2),Activities(Count3),D1,D2,years,chk1)
+    Chartme(Countries(Count1),Countries(Count2),Activities(Count3),D1,D2,...
+        years,chk1)
 end
 
 

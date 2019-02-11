@@ -10,11 +10,11 @@ function [Rmax combmax count1 count2] = AllActivities(AM,alpha)
 
     
     figure();
-    h = histogram(RPP(:,1));
+    h = histogram(RPP(:,1),-1:0.25:1);
     title('Correlations among all sets of Activities');
     ylabel('Counts');
     xlabel('Corellation factor');
-    
+    set(findall(gcf,'-property','FontSize'),'FontSize',14);
     %sort the R values and pick the 10 highest
     [Rsorted I] = sort(RPP(:,1),'descend');
     Rmax = Rsorted(1:10);

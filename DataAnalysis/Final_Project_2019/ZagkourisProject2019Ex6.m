@@ -45,11 +45,11 @@ end
 [Rmax ActivitiesMax Per1 Per2] = AllActivities(CM,alpha);
 
 fprintf('\nThe 10 sets of Activities with the highest correlation for %s are\n',Countries{Count2});
-fprintf('Correlation\t Activity1\t Activity2\n');
+fprintf('Correlation\t Activity1\t \t Activity2\n');
 for i=1:10
-    fprintf('%5.2f\t %20s\t %20s \n',Rmax(i),Activities{ActivitiesMax(i,1)},Activities{ActivitiesMax(i,2)});
+    fprintf('%5.2f\t %20s\t \t %20s \n',Rmax(i),Activities{ActivitiesMax(i,1)},Activities{ActivitiesMax(i,2)});
 end
 
-fprintf('\n %5.2f%% of the sets of Activities pass the Parametric test with a significance level of %5.2f%%\n',100*Per1,100*alpha);
-fprintf('\n %5.2f%% of the sets of Activities pass the NON-Parametric test with a significance level of %5.2f%%\n',100*Per2,100*alpha);
+fprintf('\n %5.2f%% of the sets of Activities pass \nthe Parametric test with a significance level of %5.2f%%\n',100*Per1,100*alpha);
+fprintf('\n %5.2f%% of the sets of Activities pass \nthe NON-Parametric test with a significance level of %5.2f%%\n',100*Per2,100*alpha);
 

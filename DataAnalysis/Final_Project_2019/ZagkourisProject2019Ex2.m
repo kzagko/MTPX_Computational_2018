@@ -70,12 +70,13 @@ title('Testing if datasets are from Normal distribution');
 ylabel('Chi2 value');
 xlabel('Dataset');
 legend([p1,p2],{'Chi2', 'Chi2 maximum'});
+set(findall(gcf,'-property','FontSize'),'FontSize',14)
 hold off;
-fprintf(['\nAt the significance level of %5.2f%% the percentage of the datasets' ...
+fprintf(['\nAt the significance level of %5.2f%% the percentage of the datasets\n' ...
         'that could be from a Normal distribution are %5.2f%% \n'],100*alpha, ...
         100*(1-SumH0/(ActLength*CountLength)));
 
-
+fprintf('\nAt the confindence level of %5.2f%%\n',100*alpha);
 %%Part two
 figure();
 DataM = zeros(length(years),ActLength);
@@ -101,8 +102,8 @@ for i=1:ActLength
         end
         xi2 = sum((ncounts-expval).^2./expval);
         %pval = chi2cdf(xi2,degfree,'upper');
-        fprintf('\nDoes %s Follow a normal distribution at %5.2f%% significance level: ', ...
-            Activities{i},100*alpha);
+        fprintf('\nDoes %s Follow a normal distribution : ', ...
+            Activities{i});
         if xi2 < chi2limit
             h = 0;
             fprintf('YES');
@@ -118,12 +119,13 @@ for i=1:ActLength
     hold on;
     
 end
+fprintf('\n');
 x1 = linspace(-3,3);
 plot(x1,18*normpdf(x1),'LineWidth',2);
 legend({Activities{:},'Normal Distribution'},'Location','Best');
 title('Normalized Activity Distribution');
 ylabel('Occurances');
 xlabel('Sigma distance from mean');
-
+set(findall(gcf,'-property','FontSize'),'FontSize',14)
 
 

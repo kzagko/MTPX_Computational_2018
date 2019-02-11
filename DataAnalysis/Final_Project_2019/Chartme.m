@@ -32,6 +32,6 @@ function Chartme(StrA,StrB,StrC,D1,D2,years,OpChk,nbins1)
     histogram(D2,nbins1,'DisplayStyle','stairs')
     legend(leg1,leg2,'Location','Best')
     title('EmissionP10 - Mean=0 and Sigma=1');
-
+    set(findall(gcf,'-property','FontSize'),'FontSize',14);
 
 end

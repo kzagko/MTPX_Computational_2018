@@ -19,4 +19,5 @@ function MeanP10(AM,BM,alpha)
     ylabel('Relative mean PM10 value');
     xlabel('Country code');
     legend('Parametric','Non Parametric');
+    set(findall(gcf,'-property','FontSize'),'FontSize',14);
 end
