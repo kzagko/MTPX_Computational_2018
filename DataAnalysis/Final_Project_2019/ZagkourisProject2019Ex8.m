@@ -33,6 +33,6 @@ for j=1:CountLength
     for i = 1:ActLength
         BM(:,i) = DataLoader(filelist,i,j);
     end
-    CM = [AM(:,j) BM]
+    CM = [AM(:,j) BM];
     StepfitCountries(CM,Countries{j},Activities);
 end

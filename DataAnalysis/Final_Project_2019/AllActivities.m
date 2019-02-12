@@ -16,7 +16,10 @@ function [Rmax combmax count1 count2] = AllActivities(AM,alpha)
     xlabel('Corellation factor');
     set(findall(gcf,'-property','FontSize'),'FontSize',14);
     %sort the R values and pick the 10 highest
+    RPP(:,1)=abs(RPP(:,1));
+    RPP(isnan(RPP(:,1)),1)=-inf;
     [Rsorted I] = sort(RPP(:,1),'descend');
+    RPP(isinf(RPP(:,1)),1)=NaN;
     Rmax = Rsorted(1:10);
     Imax = I(1:10);
     combmax = comb(Imax,:);

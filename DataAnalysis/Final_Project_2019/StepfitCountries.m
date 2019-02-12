@@ -44,6 +44,7 @@ function StepfitCountries(CM,Country,Actlist)
     ylabel('Expected Total PM10');
     legend('Actual Data', 'Stepwisefit', 'My Stepwise fit', 'Full fit','Location', 'best');
     figname = strcat(Country,'_MultivarFits');
+    set(findall(gcf,'-property','FontSize'),'FontSize',14);
     saveas(gcf,figname,'epsc');
     
 end

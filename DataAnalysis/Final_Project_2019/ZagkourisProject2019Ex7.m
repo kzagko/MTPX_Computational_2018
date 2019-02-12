@@ -32,8 +32,10 @@ for i=1:ActLength
     BM = DataLoader(filelist,i,1,2);
     [R2M(:,i) O1M(:,i)] = AdjRCountries(AM,BM,norder);
 end
-
+R2M = abs(R2M);
+R2M(isnan(R2M)) = -inf;
 [R2Ms Ind] = sort(R2M,'descend');
+R2M(isinf(R2M)) = NaN;
 R2Max = R2Ms(1,:);
 idx = sub2ind(size(O1M), Ind(1,:), [1:ActLength]);
 OrdMax = O1M(idx);

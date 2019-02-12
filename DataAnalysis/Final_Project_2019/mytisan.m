@@ -7,6 +7,7 @@ function [Trend1 Corr1] = mytisan(A,years,Country,Activity)
     title(titl1);
     ylabel('PM10');
     xlabel('Year');
+    set(findall(gcf,'-property','FontSize'),'FontSize',14);
     
     %Ask the user to define the order of the polynomial trend to remove
     nsize = length(A);

@@ -47,6 +47,7 @@ function StepfitActivities(CM,Activity,Countlist,mark)
     ylabel('Greece''s xpected Total PM10');
     legend('Actual Data', 'Stepwisefit', 'My Stepwise fit', 'Full fit','Location', 'best');
     figname = strcat(Activity,'_Greece_MultivarFits');
+    set(findall(gcf,'-property','FontSize'),'FontSize',14);
     saveas(gcf,figname,'epsc');
     
 end

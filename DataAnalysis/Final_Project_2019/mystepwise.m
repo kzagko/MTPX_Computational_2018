@@ -19,6 +19,9 @@ for i =1:VarSize
     X = [ones(size(y)) CM(:,i+1)];%load variable one at a time
     [b,bint,r,rint,stats] = regress(y,X);
     R1(i) = stats(1);
+%     [b,Sigm,E,CovB,logL] = mvregress(X,y);
+%     
+%     R1(i) = 1- sum(E.^2)/sum((y-mean(y)).^2);
     
 end
 
