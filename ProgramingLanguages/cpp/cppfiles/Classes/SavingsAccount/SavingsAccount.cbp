@@ -40,8 +40,12 @@
 		<Unit filename="Bank.h" />
 		<Unit filename="CheckingAccount.cpp" />
 		<Unit filename="CheckingAccount.h" />
+		<Unit filename="Person.cpp" />
+		<Unit filename="Person.h" />
 		<Unit filename="SavingsAccount.cpp" />
 		<Unit filename="SavingsAccount.h" />
+		<Unit filename="fRand.cpp" />
+		<Unit filename="fRand.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

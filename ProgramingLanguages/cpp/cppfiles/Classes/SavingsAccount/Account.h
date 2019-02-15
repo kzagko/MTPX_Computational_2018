@@ -1,43 +1,41 @@
-#ifndef SAVINGSACCOUNT_H
-#define SAVINGSACCOUNT_H
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+#include <iostream>
 #include <string>
+#include"Person.h"
 
 class Account
 {
-    public:
-        static double MinimumBalance;
-        static double Cost;
-        Account();
-        //Constractor with all elements
-        Account(std::string Owner0, std::string IBAN0, double Balance0, std::string ContactPhone0);
-        //Constractor with only Owner and IBAN
-        Account(std::string Owner0, std::string IBAN0);
-        // Get members
-        std::string getOwner();
-        std::string getIBAN();
-        std::string getContactPhone();
-        double getBalance();
-        void setContactPhone(std::string ContactPhone0);
-        void deposit(double Amount0);
-        void withdraw(double Amount0);
-        void Show();
-        void CalcCost();
-        virtual void CalCost() = 0; //this is virtual it gets overiden in children
+public:
+    static double MinimumBalance;
+    static double Cost;
+    Account();
+    //Constractor with all elements
+    Account(Person, std::string, double);
 
-    protected:
-        std::string Owner;
-        std::string IBAN;
-        std::string ContactPhone;
-        double Balance;
+    // Get members
+
+    std::string getIBAN();
+    void setIBAN(std::string);
+    double getBalance();
+    void setBalance(double);
+    void deposit(double);
+    void withdraw(double);
+    void Show();
+
+    virtual void CalcCost() = 0; //this is virtual it gets overiden in children
+
+protected:
+
+    std::string IBAN;
+    Person person;
+    double Balance;
+    int NumberOfTransactions;
+
+private:
 
 
-    private:
-//        std::string Owner;
-//        std::string IBAN;
-//        std::string ContactPhone;
-//        double Balance;
-        int NumberOfTransactions;
 
 };
 
-#endif // SAVINGSACCOUNT_H
+#endif // ACCOUNT_H

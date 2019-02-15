@@ -2,6 +2,7 @@
 #define BANK_H
 #include "SavingsAccount.h"
 #include "CheckingAccount.h"
+#include "Person.h"
 #include <vector>
 
 
@@ -9,18 +10,22 @@
 
 class Bank
 {
-    public:
-        Bank();
-        virtual ~Bank();
-        //void InsertAccount(SavingsAccount);
-        int FindAccount(std::string IBAN);
-        void CreateAccount(std::string Owner0, std::string IBAN0, double Balance0, std::string ContactPhone0, int);
-        void ShowAll();
+public:
+    Bank();
+    virtual ~Bank();
 
-    protected:
+    int FindAccount(std::string IBAN);
+    void CreateAccount(Person, std::string IBAN0, double Balance0, int);
+    void depositToAccount(std::string IBAN0,double Amount0);
+    void withdrawFromAccount(std::string IBAN0,double Amount0);
+    void CalculateCostOfAccount(std::string IBAN0);
+    void ShowAll();
+    int TotSize();
 
-    private:
-        std::vector<Account*> accounts;
+protected:
+
+private:
+    std::vector<Account*> accounts;
 };
 
 #endif // BANK_H
