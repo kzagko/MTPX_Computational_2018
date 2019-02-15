@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1550223353 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/main.cpp
+	<iostream>
+	<string>
+	"Circuit.h"
+
+1550224855 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/include/Circuit.h
+	<math.h>
+	<vector>
+	"CircuitElement.h"
+	"coil.h"
+	"Capacitor.h"
+
+1550224240 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/include/CircuitElement.h
+
+1550224240 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/src/Capacitor.cpp
+	"Capacitor.h"
+
+1550224239 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/include/Capacitor.h
+	"CircuitElement.h"
+	"Circuit.h"
+
+1550224911 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/include/coil.h
+	"CircuitElement.h"
+	"Circuit.h"
+
+1550224859 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/src/Circuit.cpp
+	"Circuit.h"
+
+1550224872 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/src/CircuitElement.cpp
+	"CircuitElement.h"
+
+1550224933 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/cpp/cppfiles/Classes/Kimon_Zagkouris_Final_Exam/src/coil.cpp
+	"coil.h"
+
