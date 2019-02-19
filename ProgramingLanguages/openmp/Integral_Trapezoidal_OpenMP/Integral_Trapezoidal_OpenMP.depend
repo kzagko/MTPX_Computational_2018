@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1550535045 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/openmp/Integral_Trapezoidal_OpenMP/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Trapezoidal.h"
+
+1550528340 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/openmp/Integral_Trapezoidal_OpenMP/src/integral_function.c
+	"integral_function.h"
+
+1550528094 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/openmp/Integral_Trapezoidal_OpenMP/include/integral_function.h
+	<math.h>
+
+1550538343 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/openmp/Integral_Trapezoidal_OpenMP/src/Trapezoidal.c
+	"Trapezoidal.h"
+	<stdio.h>
+
+1550528419 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/openmp/Integral_Trapezoidal_OpenMP/include/Trapezoidal.h
+	<omp.h>
+	<math.h>
+	"integral_function.h"
+
