@@ -96,3 +96,55 @@
 1545510577 source:/home/orion/Documents/MTPX_Computational/ProgramingLanguages/c/Sorting_algorithms/JoinSortArrays.c
 	<string.h>
 
+1551139615 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/nrutil.c
+	<stdio.h>
+	<stddef.h>
+	<stdlib.h>
+
+1551138806 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/BubbleSort.c
+	"BubbleSort.h"
+
+1551139564 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/BubbleSort.h
+	"nrutil.h"
+
+1551139615 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/nrutil.h
+
+1551138803 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/InsertionSort.c
+	"InsertionSort.h"
+
+1551130332 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/InsertionSort.h
+	<stdio.h>
+	"nrutil.h"
+
+1551130385 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/JoinSortArrays.c
+	"JoinSortArrays.h"
+
+1551130372 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/JoinSortArrays.h
+	<string.h>
+
+1551140025 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"nrutil.h"
+	<time.h>
+	<math.h>
+	"SelectionSort.h"
+	"BubbleSort.h"
+	"InsertionSort.h"
+	"MergeSort.h"
+
+1551130400 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/SelectionSort.h
+	<stdio.h>
+	"nrutil.h"
+
+1551139615 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/MergeSort.c
+	"MergeSort.h"
+
+1551139546 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/SelectionSort.c
+	"SelectionSort.h"
+
+1551139613 /home/orion/Documents/MTPX_Computational_2018/ProgramingLanguages/c/Sorting_algorithms/MergeSort.h
+	<stdio.h>
+	"nrutil.h"
+
