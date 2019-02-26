@@ -1,4 +1,4 @@
-#include <string.h>
+#include "JoinSortArrays.h"
 
 
 //Sort and join the elements of two arrays A and B of sizes n
