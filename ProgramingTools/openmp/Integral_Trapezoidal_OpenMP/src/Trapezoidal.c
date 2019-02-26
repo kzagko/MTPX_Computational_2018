@@ -3,7 +3,7 @@
 
 double Trapezoidal(double st1, double end1, int npoints, int nthreads)
 {
-    int mod, itter, id, i, st0,end0;
+    int mod, itter, id, i, st0;
     double integrals[nthreads],hstep,SumTotal,sum1;
 
     mod = npoints % nthreads; //The remainder of the division that needs to be treated separatetly
@@ -12,7 +12,7 @@ double Trapezoidal(double st1, double end1, int npoints, int nthreads)
 
 
 
-    #pragma omp parallel private(id, st0,end0,i,sum1) num_threads(nthreads)
+    #pragma omp parallel private(id, st0,i,sum1) num_threads(nthreads)
     {
         id = omp_get_thread_num ();//id unique in each thread 0,1,2,..,n-1 threads
         sum1 = 0;

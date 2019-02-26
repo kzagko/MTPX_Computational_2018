@@ -19,3 +19,33 @@
 	<math.h>
 	"integral_function.h"
 
+1550528340 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Integral_Trapezoidal_OpenMP/src/integral_function.c
+	"integral_function.h"
+
+1550528094 /home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Integral_Trapezoidal_OpenMP/include/integral_function.h
+	<math.h>
+
+1550538438 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Integral_Trapezoidal_OpenMP/src/Trapezoidal.c
+	"Trapezoidal.h"
+	<stdio.h>
+
+1550528419 /home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Integral_Trapezoidal_OpenMP/include/Trapezoidal.h
+	<omp.h>
+	<math.h>
+	"integral_function.h"
+
+1550599426 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Integral_Trapezoidal_OpenMP/src/Trapezoidal2.c
+	"Trapezoidal2.h"
+	<stdio.h>
+
+1550598276 /home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Integral_Trapezoidal_OpenMP/include/Trapezoidal2.h
+	<omp.h>
+	<math.h>
+	"integral_function.h"
+
+1550598832 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Integral_Trapezoidal_OpenMP/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Trapezoidal.h"
+	"Trapezoidal2.h"
+

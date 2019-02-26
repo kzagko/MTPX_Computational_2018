@@ -37,11 +37,15 @@
 			<Add library="gomp" />
 		</Linker>
 		<Unit filename="include/Trapezoidal.h" />
+		<Unit filename="include/Trapezoidal2.h" />
 		<Unit filename="include/integral_function.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/Trapezoidal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Trapezoidal2.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/integral_function.c">
