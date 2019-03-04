@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1551660540 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Parallel_Liebmann_OpenMP/main.cpp
+	<iostream>
+	"S_Poisson.h"
+	"Parallel_Method.h"
+
+1551636327 /home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Parallel_Liebmann_OpenMP/S_Poisson.h
+	<cmath>
+
+1551660008 /home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Parallel_Liebmann_OpenMP/Parallel_Method.h
+	<omp.h>
+	<stdio.h>
+	<vector>
+	<iostream>
+	"My_Liebmann.h"
+
+1551642769 /home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Parallel_Liebmann_OpenMP/My_Liebmann.h
+	"cmath"
+
+1551651378 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Parallel_Liebmann_OpenMP/My_Liebmann.cpp
+	"My_Liebmann.h"
+
+1551655853 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Parallel_Liebmann_OpenMP/Parallel_Method.cpp
+	"Parallel_Method.h"
+
+1551651213 source:/home/orion/Documents/MTPX_Computational_2018/ProgramingTools/openmp/Parallel_Liebmann_OpenMP/S_Poisson.cpp
+	"S_Poisson.h"
+
