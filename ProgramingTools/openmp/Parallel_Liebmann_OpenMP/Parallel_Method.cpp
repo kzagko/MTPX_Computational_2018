@@ -5,7 +5,7 @@ void Parallel_Method(double **fn, double h, double **S, double tolref, int nthre
     int i,j,myid,count1;
 
     //std::cout << R<<C<<std::endl;
-    double fnp1[R][C]={0}, tol, abssum; // Create the f array in timestep +1
+    double fnp1[R][C]={0}, t1[R][C]={0}, tol, abssum; // Create the f array in timestep +1
     //std::copy(&fn, &fn+R*C,&fnp1[0][0]);// Coppy fn into fnp1 to get the boundaries set
     tol = 1.0; // set initial value of tollerance
     //std::cout<< &fn<< &fn[0][1]<< &fn[0][9]<< &fn[1][0]<< std::endl;
@@ -15,15 +15,20 @@ void Parallel_Method(double **fn, double h, double **S, double tolref, int nthre
 
     for (i=0; i<C; i++)
     {
-        fnp1[i][R-1] = 1.0;
+        for (j=0; j<R; j++)
+        {
+            fnp1[i][j] = fn[i][j];
+            t1[i][j] = fn[i][j];
+            }
     }
 
 
+	double time1 = omp_get_wtime();
 
     while (tol > tolref)
     {
         abssum = 0.0;
-        std::cout << tol<< " Itter "<< count1<<std::endl;
+        //std::cout << tol<< " Itter "<< count1<<std::endl;
         //std::cout << tol<<" fmidup = "<< fn[C/2][R-1] <<" flup = "<< fn[0][R-1] <<" frup = "<< fn[C-1][R-1]<<std::endl;
         omp_set_dynamic(0);     // Explicitly disable dynamic teams
 
@@ -38,8 +43,8 @@ void Parallel_Method(double **fn, double h, double **S, double tolref, int nthre
             {
                 for (j=1; j<R-1; j++)
                 {
-                    fnp1[i][j] = My_Liebmann(fn[i+1][j],fn[i-1][j],fn[i][j+1],fn[i][j-1],h,S[i][j]);
-                    abssum +=  fabs(fnp1[i][j] - fn[i][j]);
+                    fnp1[i][j] = My_Liebmann(t1[i+1][j],t1[i-1][j],t1[i][j+1],t1[i][j-1],h,S[i][j]);
+                    abssum +=  fabs(fnp1[i][j] - t1[i][j]);
                     //std::cout << "I= "<<i<<" J="<< j<<" Fnp1=" <<fnp1[i][j] <<" Fn=" <<fn[i][j] <<" Abs=" <<fabs(fn[i][j]-fnp1[i][j])<<std::endl;
                 }
 
@@ -49,14 +54,14 @@ void Parallel_Method(double **fn, double h, double **S, double tolref, int nthre
         }
         //std::cout << fnp1[R/2][C/2] << " The sum is "<<abssum<< "\n";
         tol = abssum/(1.0*((R-2)*(C-2)));
-        //td::copy(&fnp1[0][0], &fnp1[0][0]+R*C,&fn[0][0]);// Coppy fnp1 into fn to set the new itteration
-        for (i=0; i<C; i++)
-        {
-            for (j=0; j<R; j++)
-            {
-                fn[i][j] = fnp1[i][j];
-            }
-        }
+        std::copy(&fnp1[0][0], &fnp1[0][0]+R*C,&t1[0][0]);// Coppy fnp1 into fn to set the new itteration
+//        for (i=0; i<C; i++)
+//        {
+//            for (j=0; j<R; j++)
+//            {
+//                t1[i][j] = fnp1[i][j];
+//            }
+//        }
 //        if (count1 == 0)
 //        {
 //            for (i=0;i<C;i++)
@@ -70,7 +75,26 @@ void Parallel_Method(double **fn, double h, double **S, double tolref, int nthre
     }
 
 
+	time1 = omp_get_wtime() - time1;
 
+// write solution to file
+std::ofstream myfile;
+std::string filename = "Liebmann_Nthrd_";
+filename += std::to_string(nthreads);
+filename += ".dat";
+myfile.open (filename);
+myfile << "Time\t Threads\t Tolerance\t Itterations\t CentralValue\n";
+myfile << time1 <<"\t"<< nthreads <<"\t"<< tol <<"\t"<< count1 <<"\t"<< fnp1[C/2][R/2] <<"\n";
+
+for (j=0; j<R; j++)
+{
+    myfile <<"\n";
+    for (i=0; i<C; i++)
+    {
+        myfile << fnp1[i][j] <<" ";
+    }
+}
+myfile.close();
 
 
 }
