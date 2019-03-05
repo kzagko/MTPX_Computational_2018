@@ -1,2 +1,2 @@
 #include "cmath"
-double My_Liebmann(double, double, double, double, double, double);
+float My_Liebmann(float, float, float, float, float);

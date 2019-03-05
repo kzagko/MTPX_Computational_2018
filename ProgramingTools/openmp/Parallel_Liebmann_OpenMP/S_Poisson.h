@@ -1,2 +1,2 @@
 #include <cmath>
-double S_Poisson(double,double);
+float S_Poisson(float,float, float);

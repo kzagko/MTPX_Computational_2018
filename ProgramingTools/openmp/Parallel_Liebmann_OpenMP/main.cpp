@@ -13,7 +13,7 @@ int main (int argc, char *argv[])
     N = 400;
     M = 400;
     nthreads = 2;
-    double tolref = 0.0000001;
+    float tolref = 0.0000001;
     if (argc < 2)
     {
         nthreads = 2;
@@ -34,32 +34,32 @@ int main (int argc, char *argv[])
 
 
 
-    double h, x[N], y[M], **fn, **S;
-    h = 1.0/N; // same h on both axis
+    float h, x[N], y[M], **fn, **S;
+    h = 1.0/(N-1); // same h on both axis
 
-    //double fn[N][M];
-    //double S[N][M];
+    //float fn[N][M];
+    //float S[N][M];
     //pfn = &fn[0][0];
     //pS = &S[0][0];
-    fn = new double *[N];
-    S = new double *[N];
+    fn = new float *[N];
+    S = new float *[N];
 
     //initiallize data
     for (i=0; i<N; i++)
     {
-        fn[i] = new double[M];
-        S[i] = new double[M];
+        fn[i] = new float[M];
+        S[i] = new float[M];
         x[i] = i*h;
         for (j=0; j<M; j++)
         {
             y[j] = j*h;
-            S[i][j] = S_Poisson(x[i], y[j]);
+            S[i][j] = S_Poisson(x[i], y[j], h);
             fn[i][j] = 0;
         }
         fn[i][M-1] = 1;
     }
 
-    Parallel_Method(fn,h,S,tolref,nthreads,N,M);
+    Parallel_Method(fn,S,tolref,nthreads,N,M);
 
 
 

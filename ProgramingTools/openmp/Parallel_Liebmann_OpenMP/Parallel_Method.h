@@ -7,4 +7,4 @@
 #include <time.h>
 #include "My_Liebmann.h"
 
-void Parallel_Method(double **, double, double **, double, int, int, int);
+void Parallel_Method(float **, float **, float, int, int, int);
