@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <time.h>
-#include "My_Liebmann.h"
+#include <cmath>
 
-void Parallel_Method(float **, float **, float, int, int, int);
+void Parallel_Method(float **&,float **&, float **&, float, int, int, int);
