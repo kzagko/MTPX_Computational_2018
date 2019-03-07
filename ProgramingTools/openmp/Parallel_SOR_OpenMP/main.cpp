@@ -3,7 +3,7 @@
 #include "Parallel_Method.h"
 
 // Program to solve the Poisson Equation using the Liebmann method
-//a.out threads M N tolerance
+//a.out threads w M N tolerance
 
 //////////////////////////////////////////////////////////////////////////////////////////
 ///// Compile flags////////////////////////////////////////////////////////////////////////
@@ -28,8 +28,8 @@ int main (int argc, char *argv[])
     int N,M,i,j,nthreads;
     N = 400;
     M = 400;
-
-    double tolref = 0.0000001;
+    double w = 1.9;
+    double tolref = 1.0e-7;
     if (argc < 2)
     {
         nthreads = 2;
@@ -39,18 +39,25 @@ int main (int argc, char *argv[])
     {
         nthreads = atoi(argv[1]);
     }
-    else if (argc>2 && argc <5)
+    else if (argc>2 && argc <4)
     {
         nthreads = atoi(argv[1]);
-        M = atoi(argv[2]);
-        N = atoi(argv[3]);
+        w = atof(argv[2]);
+    }
+    else if (argc>4 && argc <6)
+    {
+        nthreads = atoi(argv[1]);
+        w = atof(argv[2]);
+        M = atoi(argv[3]);
+        N = atoi(argv[4]);
     }
     else
     {
         nthreads = atoi(argv[1]);
-        tolref = atof(argv[4]);
-        M = atoi(argv[2]);
-        N = atoi(argv[3]);
+        w = atof(argv[2]);
+        M = atoi(argv[3]);
+        N = atoi(argv[4]);
+        tolref = atof(argv[5]);
     }
 
 
@@ -87,15 +94,15 @@ int main (int argc, char *argv[])
             fn[i][j] = 0;
             fnp1[i][j] = 0;
         }
-       }
+    }
 
-       for (i=0; i<M; i++)
-       {
-         fn[i][M-1] = 1;
+    for (i=0; i<M; i++)
+    {
+        fn[i][M-1] = 1;
         fnp1[i][M-1] = 1;
-       }
+    }
 
-    Parallel_Method(fn,fnp1,S,tolref,nthreads,N,M);
+    Parallel_Method(fn,fnp1,S,tolref,nthreads,N,M,w);
 
 
 

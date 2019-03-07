@@ -6,4 +6,4 @@
 #include <string>
 #include <cmath>
 
-void Parallel_Method(double **&,double **&, double **&, double, int, int, int);
+void Parallel_Method(double **&,double **&, double **&, double, int, int, int,double);

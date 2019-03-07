@@ -1,8 +1,8 @@
 #include "Parallel_Method.h"
 
-void Parallel_Method(double ** &t1,double** &fnp1, double** &S, double tolref, int nthreads, int R, int C)
+void Parallel_Method(double ** &t1,double** &fnp1, double** &S, double tolref, int nthreads, int R, int C,double w)
 {
-    int i,j,count1;
+    int i,j,count1,imod;
 
     //double **fnp1;
     //double fnp1 [R] [C] = {0};
@@ -11,11 +11,15 @@ void Parallel_Method(double ** &t1,double** &fnp1, double** &S, double tolref, i
     tol = 1.0; // set initial value of tollerance
     count1 = 0;
     std::ofstream myfile, tolfile;
-    std::string filename = "Liebmann_Nthrd_";
-    std::string tolfilename = "Liebmann_Nthrd_";
+    std::string filename = "SOR_Nthrd_";
+    std::string tolfilename = "SOR_Nthrd_";
     filename += std::to_string(nthreads);
+    filename += "_omg_";
+    filename += std::to_string(w);
     filename += ".dat";
     tolfilename += std::to_string(nthreads);
+    tolfilename += "_omg_";
+    tolfilename += std::to_string(w);
     tolfilename += "_tol.dat";
     tolfile.open (tolfilename);
     myfile << "Itterations\t Tolerance\n";
@@ -55,25 +59,45 @@ void Parallel_Method(double ** &t1,double** &fnp1, double** &S, double tolref, i
 
 //        #pragma omp
 //        {
-            #pragma omp parallel reduction(+:abssum) shared(R,C,t1,fnp1,S) private(i,j) default(none)
-            {
-            #pragma omp for schedule(static)
+        #pragma omp parallel reduction(+:abssum) shared(w,R,C,t1,fnp1,S) private(i,j,imod) default(none)
+        {
+            #pragma omp for
             for (i=1; i<C-1; i++)
             {
-                for (j=1; j<R-1; j++)
+                imod = i%2;//check if i is even or odd
+                for (j=imod+1; j<R-1; j+=2)
                 {
                     //fnp1[i][j] = My_Liebmann(t1[i+1][j],t1[i-1][j],t1[i][j+1],t1[i][j-1],S[i][j]);
-                    fnp1[i][j] = 0.25*(t1[i+1][j]+t1[i-1][j]+t1[i][j+1]+t1[i][j-1]-S[i][j]);
+                    fnp1[i][j] =(1.0-w)*t1[i][j]+ 0.25*w*(t1[i+1][j]+t1[i-1][j]+t1[i][j+1]+t1[i][j-1]-S[i][j]);
                     abssum +=  fabs(fnp1[i][j] - t1[i][j]);
                     //printf("%8.6f %8.6f %8.6f %8.6f \n",t1[i][j],fnp1[i][j],fnp1[i][j]-t1[i][j],S[i][j]);
                     //std::cout << "I= "<<i<<" J="<< j<<" Fnp1=" <<fnp1[i][j] <<" Fn=" <<t1[i][j] <<" Abs=" <<fabs(t1[i][j]-fnp1[i][j])<<std::endl;
                 }
 
+
+            }
+            #pragma omp for
+            for (i=1; i<C-1; i++)
+            {
+                imod = (i+1)%2;// swift the i to change the mod of the new points
+                for (j=imod+1; j<R-1; j+=2)
+                {
+                    //fnp1[i][j] = My_Liebmann(t1[i+1][j],t1[i-1][j],t1[i][j+1],t1[i][j-1],S[i][j]);
+                    fnp1[i][j] =(1.0-w)*t1[i][j]+ 0.25*w*(fnp1[i+1][j]+fnp1[i-1][j]+fnp1[i][j+1]+fnp1[i][j-1]-S[i][j]);
+                    abssum +=  fabs(fnp1[i][j] - t1[i][j]);
+                    //printf("%8.6f %8.6f %8.6f %8.6f \n",t1[i][j],fnp1[i][j],fnp1[i][j]-t1[i][j],S[i][j]);
+                    //std::cout << "I= "<<i<<" J="<< j<<" Fnp1=" <<fnp1[i][j] <<" Fn=" <<t1[i][j] <<" Abs=" <<fabs(t1[i][j]-fnp1[i][j])<<std::endl;
+                }
+
+
             }
 
 
+
+
+
             //std::copy(&fnp1[0][0], &fnp1[0][0]+R*C,&t1[0][0]);// Coppy fnp1 into fn to set the new itteration
-            #pragma omp for schedule(static)
+            #pragma omp for
             for (i=0; i<C; i++)
             {
                 for (j=0; j<R; j++)
