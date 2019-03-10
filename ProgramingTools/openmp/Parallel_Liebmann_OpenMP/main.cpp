@@ -87,13 +87,13 @@ int main (int argc, char *argv[])
             fn[i][j] = 0;
             fnp1[i][j] = 0;
         }
-       }
+    }
 
-       for (i=0; i<M; i++)
-       {
-         fn[i][M-1] = 1;
+    for (i=0; i<M; i++)
+    {
+        fn[i][M-1] = 1;
         fnp1[i][M-1] = 1;
-       }
+    }
 
     Parallel_Method(fn,fnp1,S,tolref,nthreads,N,M);
 
