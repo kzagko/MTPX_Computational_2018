@@ -1,0 +1,297 @@
+%Compile with XeLatex
+\documentclass[11pt]{scrartcl} % Font size
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+\title{	
+	\normalfont\normalsize
+	\textsc{ Αριστοτέλειο Πανεπιστήμιο Θεσσαλονίκης, Σχολή Θετικών Επιστημών, Τμήμα Φυσικής}\\ % Your university, school and/or department name(s)
+	\vspace{25pt} % Whitespace
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{20pt} % Whitespace
+	{\huge Εργασία στην OpenMP }\\ % The assignment title
+	\vspace{12pt} % Whitespace
+	\rule{\linewidth}{2pt}\\ % Thick bottom horizontal rule
+	\vspace{12pt} % Whitespace
+}
+
+\author{\LARGE Κίμων Ζαγκούρης \\ A.E.M. 4353 \\ Email: kzagko@gmail.com} % Your name
+
+\date{\normalsize\today} % Today's date (\today) or a custom date
+
+\begin{document}
+
+\maketitle
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{loom.jpg}
+\end{figure}
+%\footnote{Image credit http://blog.thecheaproute.com/poshanu-cham-temple-and-the-princes-castle-phan-thiet-vietnam/loom/.}
+\pagenumbering{gobble}
+\newpage
+
+
+%\tableofcontents
+%\newpage
+\pagenumbering{arabic}
+
+
+\section{Ανάλυση}
+
+
+Στην εργασία αυτή βρήκαμε την λύση του ελλειπτικού προβλήματος συνοριακών τιμών που καθορίζεται
+από τη διαφορική εξίσωση,
+
+\begin{equation*}
+u_{xx}+u_{yy}=-10\left(x^2+y^2+5\right),
+\end{equation*}
+
+με την χρήση των επαναληπτικών μεθόδων Liebmann και SOR. 
+
+η ανάλυση εκτελέστηκε σε επεξεργαστή τα χαρακτηριστικά του οποίου αναφέρονται στον \hyperref[table:t1]{Πίνακα \ref*{table:t1}}. Ο συγκεκριμένος επεξεργαστής έχει 32 φυσικούς πυρήνες και άλλους 32 εικονικούς (multithreading).
+
+\begin{table}[h]
+\begin{tabular}{ll}
+Processor name & Intel(R) Xeon(R) Gold 6140 \\
+Packages(sockets) & 2 \\
+Cores & 36 \\
+Processors(CPUs) & 72 \\
+Cores per package & 18 \\
+Threads per core & 2
+\end{tabular}
+\caption{Χαρακτηριστικά επεξεργαστή.}
+\label{table:t1}
+\end{table}
+
+
+
+
+Παρακάτω είναι τα αποτελέσματα της ανάλυσής μας.
+
+Στον \hyperref[table:t2]{Πίνακα \ref*{table:t2}} έχουμε τα αποτελέσματα από την μέθοδο Liebmann.
+
+\begin{table}[h]
+\begin{tabular}{lllll}
+Time(s) & Threads & Tolerance & Itterations & Central Value\\
+\hline
+\hline
+70.3677 & 1 & 9.99991e-08 & 208010 & 4.35178 \\
+66.0042 & 2 & 9.99991e-08 & 208010 & 4.35178 \\
+33.781 & 4 & 9.99991e-08 & 208010 & 4.35178 \\
+18.4393 & 8 & 9.99991e-08 & 208010 & 4.35178 \\
+12.7887 & 12 & 9.99991e-08 & 208010 & 4.35178 \\
+10.7612 & 16 & 9.99991e-08 & 208010 & 4.35178 \\
+8.21691 & 24 & 9.99991e-08 & 208010 & 4.35178 \\
+7.62344 & 32 & 9.99991e-08 & 208010 & 4.35178 \\
+8.92122 & 48 & 9.99991e-08 & 208010 & 4.35178 \\
+11.0658 & 64 & 9.99991e-08 & 208010 & 4.35178 \\
+12.6623 & 72 & 9.99991e-08 & 208010 & 4.35178
+\end{tabular}
+\caption{Τιμές Ανάλυσης με την μέθοδο Liebmann.}
+\label{table:t2}
+\end{table}
+
+
+Στα σχήματα \hyperref[fig:f1]{\ref{fig:f1}},\hyperref[fig:f2]{\ref{fig:f2}} και \hyperref[fig:f3]{\ref{fig:f3}} έχουμε τον χρόνο εκτέλεσης, την επιτάχυνση παράλληλης επεξεργασίας και την απόδοση παράλληλης επεξεργασίας αντίστοιχα.
+
+Από το \hyperref[fig:f1]{Σχήμα \ref*{fig:f1}} βλέπουμε ότι ο χρόνος επίλυσης για \textbf{έναν} πυρήνα, αν και μεγαλύτερος, είναι παρόμοιος με αυτόν για \textbf{δύο}. Αυτό οφείλεται πιθανότατα στο γεγονός ότι ο compiler αυτόματα βελτιστοποιεί τον κώδικα για έναν πυρήνα, πιθανότατα μέσω vectorization των for loops με αποτέλεσμα να χρειάζεται λιγότερο χρόνο εκτέλεσης. 
+
+Στο \hyperref[fig:f2]{Σχήμα \ref*{fig:f2}} βλέπουμε την επιτάχυνση της παράλληλης επεξεργασίας. πως παρατηρούμε το μέγιστο εμφανίζεται περίπου στους 36 πυρήνες που είναι και ο μέγιστος αριθμός φυσικών πυρήνων σε αυτόν τον επεξεργαστή. Η επιτάχυνση βέβαια δεν είναι ίση με τον αριθμ'ο των πυρήνων κυρίως λόγω του ότι υπάρχει Overhead αλλά και γραμμίκο κομμάτι στον κώδικα που δεν μπορεί να παραλληλιστεί. Στο συγκεκριμένο παράδειγμα επίσης, ο φόρτος εργασίας μέσα στα for loops που παραλληλίζουμε είναι σχετικά μικρός και συγκρίσιμος με το κόστος της δημιουργίας των threads. Αυτό φαίνεται πιο αναλυτικά στο \hyperref[fig:f4]{Σχήμα \ref*{fig:f4}} όπου παρατηρούμε ότι το πρόγραμμά μας δεν τρέχει συνέχεια σε 24 πυρήνες όπως ζητήσαμε αλλά έχει την κατανομή που βλέπουμε με μέσο όρο τους 17 πυρήνες. Με επιπλέον ανάλυση έχουμε το \hyperref[fig:f5]{Σχήμα \ref*{fig:f5}} στο οποίο παρατηρούμε ότι σημαντικό ποσοστό του χρόνου στα threads δαπανάτε είτε σε αναμονή (spin) είτε σε overhead. Αυτό είναι κυρίως αποτέλεσμα το χαμηλού φόρτου υπολογισμού μέσα στα threads.
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Liebmann_Execution_time.jpg}	
+	\caption{Χρόνος εκτέλεσης για διάφορο αριθμό threads. }
+	\label{fig:f1}
+\end{figure}
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Liebmann_Parallel_Speedup.jpg}	
+	\caption{Επιτάχυνση παράλληλης επεξεργασίας για διάφορο αριθμό threads. }
+	\label{fig:f2}
+\end{figure}
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Liebmann_Parallel_Efficiency.jpg}	
+	\caption{Απόδοση παράλληλης επεξεργασίας για διάφορο αριθμό threads. }
+	\label{fig:f3}
+\end{figure}
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{CPUutilization.jpg}	
+	\caption{Μέση χρήση πυρήνων για εκτέλεση με 24 threads. Στον οριζόντιο άξονα ο αριθμός πυρήνων που δουλεύουν ταυτόχρονα και στον κάθετο άξονα ο χρόνος για τον οποίο δουλεύουν.}
+	\label{fig:f4}
+\end{figure}
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Overhead.jpg}	
+	\caption{Ανάλυση του χρόνου εργασίας 24 threads. Στον οριζόντιο άξονα ο χρόνος εκτέλεσης από 16-17 δευτερόλεπτα και στον κάθετο άξονα τα 24 threads. Με πράσινο χρώμα ο χρόνος που τα threads εκτελούν εργασία και με πορτοκαλί χρώμα ο χρόνος που τα threads αναμένουν ή έχουν overhead.}
+	\label{fig:f5}
+\end{figure}
+
+
+Στα Σχήματα \hyperref[fig:f6]{\ref{fig:f6}} και \hyperref[fig:f7]{\ref{fig:f7}}, έχουμε την λύση της εξίσωσης Poisson. Ενώ στα Σχήματα \hyperref[fig:f8]{\ref{fig:f8}} και
+\hyperref[fig:f9]{\ref{fig:f9}} έχουμε τις διαφορές των λύσεων όπου βλέπουμε ότι υπάρχουν μεγάλες διαφορές στα άκρα της αριθμητικής λύσης καθώς και μικρότερες στο κέντρο.
+
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{RealData.jpg}	
+	\caption{Αναλυτική λύση της εξίσωσης Poisson.}
+	\label{fig:f6}
+\end{figure}
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Liebmann.jpg}	
+	\caption{Αριθμητική λύση της εξίσωσης Poisson.}
+	\label{fig:f7}
+\end{figure}
+
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Diff.jpg}	
+	\caption{Απόλυτη διαφορά των λύσεων.}
+	\label{fig:f8}
+\end{figure}
+
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Diff_Zoom.jpg}	
+	\caption{Μεγέθυνση της απόλυτης διαφοράς των λύσεων.}
+	\label{fig:f9}
+\end{figure}
+
+
+
+
+Επαναλάβαμε την παραπάνω ανάλυση αλλά αυτή την φορά με την μέθοδο SOR. Στον \hyperref[table:t3]{Πίνακα \ref*{table:t3}} έχουμε τα αποτελέσματα από την μέθοδο SOR για διάφορες τιμές της μεταβλητής ω.
+
+
+\begin{table}[h]
+\begin{tabular}{lllll}
+Time(s) & Threads & Tolerance & Itterations & Central Value\\
+\hline
+\hline
+$\mathbf{\omega=1}$\\
+\hline
+48.3543 & 1 & 9.99938e-08 & 115187 & 4.35574 \\
+45.0474 & 2 & 9.99938e-08 & 115187 & 4.35574 \\
+22.4003 & 4 & 9.99938e-08 & 115187 & 4.35574 \\
+11.0445 & 8 & 9.99938e-08 & 115187 & 4.35574 \\
+7.76593 & 12 & 9.99938e-08 & 115187 & 4.35574 \\
+6.31984 & 16 & 9.99938e-08 & 115187 & 4.35574 \\
+5.07433 & 24 & 9.99938e-08 & 115187 & 4.35574 \\
+4.75437 & 32 & 9.99938e-08 & 115187 & 4.35574 \\
+5.9415 & 48 & 9.99938e-08 & 115187 & 4.35574 \\
+6.6835 & 64 & 9.99938e-08 & 115187 & 4.35574 \\
+8.26442 & 72 & 9.99938e-08 & 115187 & 4.35574\\
+$\mathbf{\omega=1.95}$\\
+\hline
+1.8593 & 1 & 9.98276e-08 & 4382 & 4.3596 \\
+1.75654 & 2 & 9.98276e-08 & 4382 & 4.3596 \\
+0.886944 & 4 & 9.98276e-08 & 4382 & 4.3596 \\
+0.444763 & 8 & 9.98276e-08 & 4382 & 4.3596 \\
+0.322664 & 12 & 9.98276e-08 & 4382 & 4.3596 \\
+0.262419 & 16 & 9.98276e-08 & 4382 & 4.3596 \\
+0.223713 & 24 & 9.98276e-08 & 4382 & 4.3596 \\
+0.205245 & 32 & 9.98276e-08 & 4382 & 4.3596 \\
+0.252401 & 48 & 9.98276e-08 & 4382 & 4.3596 \\
+0.280584 & 64 & 9.98276e-08 & 4382 & 4.3596 \\
+0.354445 & 72 & 9.98276e-08 & 4382 & 4.3596 \\
+$\mathbf{\omega=1.99}$\\
+\hline
+0.568381 & 1 & 9.81067e-08 & 1277 & 4.35971 \\
+0.534328 & 2 & 9.81067e-08 & 1277 & 4.35971 \\
+0.282344 & 4 & 9.81067e-08 & 1277 & 4.35971 \\
+0.145155 & 8 & 9.81067e-08 & 1277 & 4.35971 \\
+0.107497 & 12 & 9.81067e-08 & 1277 & 4.35971 \\
+0.0902891 & 16 & 9.81067e-08 & 1277 & 4.35971 \\
+0.0785352 & 24 & 9.81067e-08 & 1277 & 4.35971 \\
+0.0771618 & 32 & 9.81067e-08 & 1277 & 4.35971 \\
+0.0952247 & 48 & 9.81067e-08 & 1277 & 4.35971 \\
+0.102064 & 64 & 9.81067e-08 & 1277 & 4.35971 \\
+0.127787 & 72 & 9.81067e-08 & 1277 & 4.35971
+\end{tabular}
+\caption{Τιμές ανάλυσης με την μέθοδο SOR για τιμές του ω=1, 1.95 και 1.99}
+\label{table:t3}
+\end{table}
+
+Στο \hyperref[fig:f10]{Σχήμα \ref*{fig:f10}} παρατηρούμε ότι ο χρόνος εκτέλεσης της μεθόδου SORί είναι γενικά μικρότερος από την μέθοδο Liebmann. Στο \hyperref[fig:f11]{Σχήμα \ref*{fig:f11}} παρατηρούμε ότι τα βήματα που απαιτούνται από την μέθοδο SOR για την επίλυση αυτού του προβλήματος είναι σημαντικά μικρότερα από αυτά της μεθόδου Liebmann. Για παράδειγμα ακόμα και με $\omega=1$ η SOR χρειάζεται περίπου τα μισά βήματα από την Liebmann και αυτό είναι λογικό αφού στην SOR στο ίδιο βήμα ανανεώνουμε τις μισές τιμές του πλέγματος για μια χρονική στιγμή και τις άλλες μισές για την επόμενη ουσιαστικά εκτελώντας δύο χρονικά βήματα με το μισό πλέγμα. Αλλά η πραγματική δύναμη της μεθόδου SOR εμφανίζεται όταν το $omega>1$ όπου η μέθοδος επιταχύνει σημαντικά και χρειάζεται τάξεις μεγέθους λιγότερα βήματα για την επίλυση του ίδιου προβλήματος. 
+
+
+Στα σχήματα \hyperref[fig:f12]{\ref*{fig:f12}} και \hyperref[fig:f13]{\ref*{fig:f13}} παρατηρούμε συγκριτικά την Παράλληλη επιτάχυνση και απόδοση των μεθόδων. Όπως αναφέραμε και προηγουμένως για αυτόν τον επεξεργαστή το μέγιστο παρατηρείτε κοντά στο 36 που είναι και ο αριθμός των πραγματικών πυρήνων του. Παρατηρούμε ότι ενώ ο κώδικας εν γένει τρέχει πιο γρήγορα όσο αυξάνουμε τα threads μέχρι το 36 η απόδοση δεν είναι σημαντικά διαφορετική από ένα σημείο και μετά και ίσως να μην αξίζει η χρήση όλων των δυνατών πυρήνων.
+
+Στο \hyperref[fig:f13]{Σχήμα \ref*{fig:f13}} παρατηρούμε την σύγκλιση της tolerance σε σχέση με τα βήματα της μεθόδου. Για $\omega=1$ η σύγκλιση είναι παρόμοια της Liebmann αλλά ελαφρώς μεγαλύτερη λόγω του μικρού παράγοντα Overrelaxation. Παρατηρούμε ότι όσο αυξάνει ο παράγοντας $\omega$ και άρα το Overrelaxation η μέθοδος SOR συγκλίνει με γρηγορότερο ρυθμό σε σχέση με την μέθοδο Liebmann.
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Execution_time.jpg}	
+	\caption{Χρόνος εκτέλεσης των μεθόδων.}
+	\label{fig:f10}
+\end{figure}
+
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Comparison.jpg}	
+	\caption{Συνολικές επαναλήψεις των μεθόδων.}
+	\label{fig:f11}
+\end{figure}
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Parallel_Speedup.jpg}	
+	\caption{Επιτάχυνση παράλληλης επεξεργασίας των μεθόδων.}
+	\label{fig:f12}
+\end{figure}
+
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Parallel_efficiency.jpg}	
+	\caption{Απόδοση παράλληλης επεξεργασίας των μεθόδων.}
+	\label{fig:f13}
+\end{figure}
+
+\begin{figure}[H] 
+
+	\centering
+	\includegraphics[width=1\columnwidth]{Tollerance.jpg}	
+	\caption{Μεταβολή της tolerance με τον αριθμό βημάτων των μεθόδων.}
+	\label{fig:f14}
+\end{figure}
+
+
+\end{document}
